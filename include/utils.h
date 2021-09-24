@@ -56,63 +56,6 @@ void print_vector(GrB_Vector vec, char const *label)
 
 }
 
-void pretty_print_matrix_FP64(GrB_Matrix mat, char const *label)
-{
-    GrB_Index M,N;
-    GrB_Matrix_nrows(&M, mat);
-    GrB_Matrix_ncols(&N, mat);
-
-    double val;
-    GrB_Info ret_val;
-
-    printf("Matrix: %s =\n", label);
-    for (GrB_Index row = 0; row < M; ++row)
-    {
-        printf("[");
-        for (GrB_Index col = 0; col < N; ++col)
-        {
-            ret_val = GrB_Matrix_extractElement_FP64(&val, mat, row, col);
-            if (GrB_SUCCESS == ret_val)
-            {
-                if (col == 0)
-                {
-                    printf("%3lf", (double)val);
-                }
-                else
-                {
-                    printf(", %3lf", (double)val);
-                }
-            }
-            else if (GrB_NO_VALUE == ret_val)
-            {
-                if (col == 0)
-                {
-                    printf("  -");
-                }
-                else
-                {
-                    printf(",   -");
-                }
-            }
-            else
-            {
-                if (col == 0)
-                {
-                    printf("  ERR");
-                }
-                else
-                {
-                    printf(", ERR");
-                }
-            }
-        }
-        printf("]\n");
-    }
-}
-
-
-
-
 GrB_Info readMatrix(GrB_Matrix *graph, FILE *f, bool one_based) {
     int64_t len = 256;
     int64_t ntuples = 0;
