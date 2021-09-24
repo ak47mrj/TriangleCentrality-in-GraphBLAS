@@ -1,6 +1,56 @@
-
-
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+
+void print_vector(GrB_Vector vec, char const *label)
+{
+    GrB_Index N;
+    GrB_Vector_size(&N, vec);
+
+    double val;
+    GrB_Info ret_val;
+
+    printf("Vector: %s =\n", label);
+
+    printf("[");
+    for (GrB_Index idx = 0; idx < N; ++idx)
+    {
+        ret_val = GrB_Vector_extractElement_FP64(&val, vec, idx);
+        if (GrB_SUCCESS == ret_val)
+        {
+            if (idx == 0)
+            {
+                printf("%lf", (double)val);
+            }
+            else
+            {
+                printf(", %lf", (double)val);
+            }
+        }
+        else if (GrB_NO_VALUE == ret_val)
+        {
+            if (idx == 0)
+            {
+                printf("  -");
+            }
+            else
+            {
+                printf(",   -");
+            }
+        }
+        else
+        {
+            if (idx == 0)
+            {
+                printf("  ERR");
+            }
+            else
+            {
+                printf(", ERR");
+            }
+        }
+    }
+    printf("]\n");
+
+}
 
 GrB_Info readMatrix(GrB_Matrix *graph, FILE *f, bool one_based) {
     int64_t len = 256;
