@@ -1,5 +1,5 @@
 //
-// Created by Fuhuan Li on 9/23/21.
+// Created by Fuhuan Li
 //
 
 #include <stdio.h>
@@ -20,7 +20,6 @@ int main(int argc,char** argv) {
     readMatrix(&graph, fp, true);
     fclose(fp);
 
-
     GrB_Vector result;
 
     struct timespec start, end;
@@ -31,7 +30,6 @@ int main(int argc,char** argv) {
     duration = (end.tv_sec - start.tv_sec) * 1000000000 + (end.tv_nsec - start.tv_nsec);
     printf("%llu\n", duration);
 
-    //print_vector(result, "rank");
     GrB_free(&result);
     GrB_free(&graph);
     GrB_finalize();
