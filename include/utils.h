@@ -1,7 +1,3 @@
-//
-// Created by Fuhuan Li on 7/4/21.
-//
-
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 void print_vector(GrB_Vector vec, char const *label)
